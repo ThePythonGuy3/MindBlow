@@ -1,0 +1,51 @@
+type: ItemTurret
+name: Sting
+description: Shoots very precise piercing nails, very self-explanatory.
+health: 200
+size: 2
+reload: 100
+range: 300
+inaccuracy: 0
+rotatespeed: 15
+shootSound: stings
+ammo: {
+  zinc: {
+    type: BasicBulletType
+    bulletSprite: mindblow-sting-bullet-zinc
+    ammoMultiplier: 1
+    lifetime: 100
+    speed: 4
+    damage: 7
+    knockback: 0.5
+    pierce: true
+  }
+  surge-alloy: {
+    type: BasicBulletType
+    bulletSprite: mindblow-sting-bullet-surge
+    ammoMultiplier: 1
+    lifetime: 100
+    speed: 4
+    damage: 10
+    pierce: true
+    lightining: 1
+    lightningLength: 10
+  }
+  blast-compound: {
+    type: BasicBulletType
+    bulletSprite: mindblow-sting-bullet-blast
+    incendAmount: 5
+    ammoMultiplier: 1
+    lifetime: 100
+    speed: 4
+    damage: 10
+    pierce: true
+  }
+}
+requirements: [
+  zinc/100
+  copper/30
+  titanium/15
+  plastanium/60
+]
+category: turret
+research: missile-zipper

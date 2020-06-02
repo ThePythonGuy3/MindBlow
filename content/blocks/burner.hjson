@@ -1,0 +1,20 @@
+name: Burner
+description: Burns unlucky enemies.
+health: 350
+size: 1
+rotate: true
+shootCone: 360
+shootSound: flame
+coolEffect: none
+update: true
+reload: 200
+range: 60
+inaccuracy: 0
+rotatespeed: 0
+outlineIcon: false
+requirements: [
+  copper/25
+  lead/10
+]
+category: turret
+research: salvo

@@ -1,0 +1,22 @@
+health: 1050
+size: 3
+name: Sword
+description: Sword. That's all.
+inaccuracy: 0
+range: 330
+reload: 1
+shootDuration: 200
+update: true
+rotateSpeed: 0
+firingMoveFract: 10
+shootType: meltdownLaser
+shootCone: 360
+requirements: [
+  plastanium/150
+  zinc/100
+  surge-alloy/50
+  graphite/150
+  thorium/200
+]
+category: turret
+research: swarmer

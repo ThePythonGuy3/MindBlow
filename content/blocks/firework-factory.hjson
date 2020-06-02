@@ -1,0 +1,24 @@
+name: Firework factory
+description: Makes Firework units.
+type: UnitFactory
+unitType: firework
+size: 3
+produceTime: 300
+consumes: {
+  power: 0.5
+  items: {
+    items: [
+      silicon/30
+      metaglass/30
+      pyratite/300
+    ]
+  }
+}
+category: units
+research: meltdown
+requirements: [
+  zinc/50
+  plastanium/5
+  silicon/40
+  titanium/15
+]

@@ -1,2 +1,6 @@
 # MindBlow
-Mindustry mod that adds silly but usefull things
+
+This mod adds a few drills to your game.  
+*Still in development*
+
+> **ThePythonGuy.**

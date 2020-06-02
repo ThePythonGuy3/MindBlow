@@ -1,0 +1,7 @@
+name: "MindBlow",
+author: "ThePythonGuy",
+description: "Adds some drills to enhance your experience.",
+version: 1.5,
+minGameVersion: "104",
+dependencies: []
+

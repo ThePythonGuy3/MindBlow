@@ -1,0 +1,16 @@
+health: 100
+size: 2
+name: Team bomb
+description: Transforms the blocks in its range to your team.
+update: true
+targetable: false
+rebuildable: false
+breakable: false
+requirements: [
+  plastanium/50
+  zinc/60
+  graphite/30
+  thorium/50
+]
+category: turret
+research: swarmer

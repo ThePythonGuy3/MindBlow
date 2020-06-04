@@ -74,12 +74,48 @@ magicBulletp.hitEffect = newEffect(18, e => {
 });
 magicBulletp.despawnEffect = magicBulletmg.hitEffect;
 
-
+const changerBulletw = extend(BasicBulletType, {
+	hitTile: function(b, tile){
+		this.hit(b);
+		if(tile.entity != null){
+			tile.setTeam(b.getTeam());
+		};
+	},
+	draw(b){
+		elib.fillCircle(b.x, b.y, this.frontColor, 1, this.bulletWidth);
+		elib.outlineCircle(b.x, b.y, this.backColor, 1, this.bulletWidth);
+		if(b.timer.get(0, 3)){
+			Effects.effect(this.trailEffectA, b.x, b.y, b.rot());
+		}
+    if(Time.delta() > 0){
+		  Effects.effect(this.trailEffectB, b.x, b.y, b.rot());
+    }
+	}
+});
+changerBulletw.damage = 0;
+changerBulletw.speed = 7;
+changerBulletw.lifetime = 100;
+changerBulletw.drag = 0.02;
+changerBulletw.bulletWidth = 9;
+changerBulletw.bulletHeight = 9;
+changerBulletw.frontColor = Color.valueOf("ff8ffb");
+changerBulletw.backColor = Color.valueOf("cd86e3");
+changerBulletw.shootEffect = Fx.shootBig;
+changerBulletw.smokeEffect = Fx.shootBigSmoke;
+changerBulletw.trailEffectA = newEffect(30, e => {
+	elib.fillCircle(e.x, e.y, changerBulletw.backColor, 1, 0.2 + e.fout() * 4.8);
+});
+changerBulletw.trailEffectB = newEffect(48, e => {
+	var angle = (Time.time() + Mathf.randomSeed(e.id, 360)) % 360;
+	var dist = changerBulletw.bulletWidth + 1 - e.fout() * 1.5;
+	elib.fillCircle(e.x + Angles.trnsx(angle, dist), e.y + Angles.trnsy(angle, dist), changerBulletw.backColor, 1, e.fout() * 1.1);
+});
 const wavy = extendContent(DoubleTurret, "wavy", {
   init(){
     wavy.ammo(
       Items.metaglass, magicBulletmg,
       Items.plastanium, magicBulletp,
+      Items.thorium, changerBulletw,
     );
     this.super$init();
   },

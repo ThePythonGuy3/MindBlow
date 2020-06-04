@@ -1,6 +1,6 @@
 # MindBlow
 
-This mod adds a few drills to your game.  
+A mod that adds silly but useful things.  
 *Still in development*
 
 > **ThePythonGuy.**

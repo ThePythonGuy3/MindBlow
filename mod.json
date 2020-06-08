@@ -1,7 +1,7 @@
 name: "MindBlow",
 author: "ThePythonGuy",
-description: "Adds some silly but useful things to the game.",
-version: 2.0,
+description: "Adds some silly but usefull things to the game.",
+version: 2.2,
 minGameVersion: "104",
 dependencies: []
 

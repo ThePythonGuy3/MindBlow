@@ -1,5 +1,5 @@
 const elib = require("effectlib");
-
+var xpos = 0;
 const magicBulletmg = extend(BasicBulletType, {
 	draw(b){
 		elib.fillCircle(b.x, b.y, this.frontColor, 1, this.bulletWidth);
@@ -110,12 +110,94 @@ changerBulletw.trailEffectB = newEffect(48, e => {
 	var dist = changerBulletw.bulletWidth + 1 - e.fout() * 1.5;
 	elib.fillCircle(e.x + Angles.trnsx(angle, dist), e.y + Angles.trnsy(angle, dist), changerBulletw.backColor, 1, e.fout() * 1.1);
 });
+changerBulletw.hitEffect = newEffect(18, e => {
+	elib.fillCircle(e.x, e.y, changerBulletw.frontColor, 1.2 + e.fin() * 0.8, 1.2 + e.fout() * 11.8);
+	elib.outlineCircle(e.x, e.y, changerBulletw.backColor, e.fout() * 4, e.fin() * 13);
+});
+changerBulletw.despawnEffect = changerBulletw.hitEffect;
+
+
+const wallchangerBullet = extend(BasicBulletType, {
+    hitTile: function(b, tile){
+        this.hit(b);
+        if(tile.entity != null){
+        	if(tile.block() == "plastanium-wall"){
+        		Call.setTile(tile, Blocks.titaniumWall, tile.getTeam(), 0);
+        	} else if (tile.block() == "thorium-wall"){
+        		Call.setTile(tile, Blocks.plastaniumWall, tile.getTeam(), 0);
+        	} else if (tile.block() == "titanium-wall"){
+        		Call.setTile(tile, Blocks.copperWall, tile.getTeam(), 0);
+        	} else if (tile.block() == "surge-wall"){
+        		Call.setTile(tile, Blocks.phaseWall, tile.getTeam(), 0);
+        	} else if (tile.block() == "phase-wall"){
+        		Call.setTile(tile, Blocks.plastaniumWall, tile.getTeam(), 0);
+        	} else if (tile.block() == "plastanium-wall-large"){
+        		b.getOwner().damage(b.getOwner().maxHealth() * 0.3);
+        		Call.setTile(tile, Blocks.titaniumWallLarge, tile.getTeam(), 0);
+        	} else if (tile.block() == "thorium-wall-large"){
+        		b.getOwner().damage(b.getOwner().maxHealth() * 0.3);
+        		Call.setTile(tile, Blocks.plastaniumWallLarge, tile.getTeam(), 0);
+        	} else if (tile.block() == "titanium-wall-large"){
+        		b.getOwner().damage(b.getOwner().maxHealth() * 0.3);
+        		Call.setTile(tile, Blocks.copperWallLarge, tile.getTeam(), 0);
+        	} else if (tile.block() == "surge-wall-large"){
+        		b.getOwner().damage(b.getOwner().maxHealth() * 0.3);
+        		Call.setTile(tile, Blocks.phaseWallLarge, tile.getTeam(), 0);
+        	} else if (tile.block() == "phase-wall-large"){
+        		b.getOwner().damage(b.getOwner().maxHealth() * 0.3);
+        		Call.setTile(tile, Blocks.plastaniumWallLarge, tile.getTeam(), 0);
+        	};
+        	
+        };
+    },
+    draw(b){
+		elib.fillCircle(b.x, b.y, this.frontColor, 1, this.bulletWidth);
+		elib.outlineCircle(b.x, b.y, this.backColor, 1, this.bulletWidth);
+		if(b.timer.get(0, 3)){
+			Effects.effect(this.trailEffectA, b.x, b.y, b.rot());
+		}
+    if(Time.delta() > 0){
+		  Effects.effect(this.trailEffectB, b.x, b.y, b.rot());
+    }
+	}
+});
+wallchangerBullet.speed = 7;
+wallchangerBullet.damage = 60;
+wallchangerBullet.lifetime = 100;
+wallchangerBullet.drag = 0.02;
+wallchangerBullet.bulletWidth = 3;
+wallchangerBullet.bulletHeight = 3;
+wallchangerBullet.reloadMultiplier = 0.4;
+wallchangerBullet.frontColor = Color.valueOf("ffee36");
+wallchangerBullet.backColor = Color.valueOf("d18c5a");
+wallchangerBullet.shootEffect = Fx.shootBig;
+wallchangerBullet.smokeEffect = Fx.shootBigSmoke;
+wallchangerBullet.changeEffect = newEffect(12, e => {
+	elib.fillCircle(e.x, e.y, wallchangerBullet.backColor, 1, 0.2 + e.fout() * 4.8);
+});
+wallchangerBullet.trailEffectA = newEffect(30, e => {
+	elib.fillCircle(e.x, e.y, wallchangerBullet.backColor, 1, 0.2 + e.fout() * 4.8);
+});
+wallchangerBullet.trailEffectB = newEffect(48, e => {
+	var angle = (Time.time() + Mathf.randomSeed(e.id, 360)) % 360;
+	var dist = wallchangerBullet.bulletWidth + 1 - e.fout() * 1.5;
+	elib.fillCircle(e.x + Angles.trnsx(angle, dist), e.y + Angles.trnsy(angle, dist), wallchangerBullet.backColor, 1, e.fout() * 1.1);
+});
+wallchangerBullet.despawnEffect = newEffect(18, e => {
+	elib.fillCircle(e.x, e.y, wallchangerBullet.frontColor, 1.2 + e.fin() * 0.8, 1.2 + e.fout() * 11.8);
+	elib.outlineCircle(e.x, e.y, wallchangerBullet.backColor, e.fout() * 4, e.fin() * 13);
+});
+wallchangerBullet.hitEffect = newEffect(13, e => {
+	elib.outlineCircle(e.x, e.y, Color.valueOf("e8af3c"), e.fout() * 4, e.fin() * 13);
+	elib.outlineCircle(e.x, e.y, Color.valueOf("ffee36"), e.fout() * 4, e.fin() * 10);
+});
 const wavy = extendContent(DoubleTurret, "wavy", {
   init(){
     wavy.ammo(
       Items.metaglass, magicBulletmg,
       Items.plastanium, magicBulletp,
       Items.thorium, changerBulletw,
+      Items.surgealloy, wallchangerBullet,
     );
     this.super$init();
   },

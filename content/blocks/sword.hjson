@@ -3,13 +3,14 @@ size: 3
 name: Sword
 description: Sword. That's all.
 inaccuracy: 0
-range: 330
+range: 160
 reload: 1
-shootDuration: 200
+shootDuration: 600
 update: true
+recoil: 0
+restitution: 0
 rotateSpeed: 0
 firingMoveFract: 10
-shootType: meltdownLaser
 shootCone: 360
 requirements: [
   plastanium/150

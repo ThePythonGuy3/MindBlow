@@ -9,7 +9,7 @@ smokeEffect: shootBigSmoke
 inaccuracy: 0
 rotatespeed: 4
 shotWidth: 2
-range: 330
+range: 300
 recoil: 3.5
 requirements: [
   plastanium/150

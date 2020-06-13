@@ -1,7 +1,7 @@
 # MindBlow
 
 A mod that adds silly but useful things.  
-*Heavy development righ now*
+*Heavy development right now*
 
 > **ThePythonGuy.**
 

@@ -18,7 +18,7 @@ const swordBullet = extend(BasicBulletType, {
 });
 swordBullet.speed = 0.0001;
 swordBullet.damage = 12;
-swordBullet.lifetime = 0.0001;
+swordBullet.lifetime = 10;
 swordBullet.bulletHeight = 500;
 swordBullet.hitEffect = Fx.none;
 swordBullet.despawnEffect = Fx.none;

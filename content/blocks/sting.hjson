@@ -15,8 +15,7 @@ ammo: {
     ammoMultiplier: 1
     lifetime: 100
     speed: 4
-    damage: 7
-    knockback: 0.5
+    damage: 10
     pierce: true
   }
   surge-alloy: {
@@ -42,7 +41,7 @@ ammo: {
   }
 }
 requirements: [
-  zinc/100
+  brass/100
   copper/30
   titanium/15
   plastanium/60

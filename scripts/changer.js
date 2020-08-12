@@ -38,7 +38,7 @@ const changerturret = extendContent(Block, "changer", {
         
         
         if(entity.timer.get(this.bulletTimer, 50)){
-            if(entity.getTicking() < 5){
+            if(entity.getTicking() < 5 && entity.getTicking() > 0){
                 Sounds.buttonClick.at(tile.drawx(), tile.drawy())
             }
             if(entity.getTicking() > 4){
@@ -56,12 +56,15 @@ const changerturret = extendContent(Block, "changer", {
         }
     },
     onDestroyed(tile){},
+    removed(tile){
+        placingabi = true;
+    },
     canPlaceOn(tile){
         return placingabi;
     },
     draw(tile){
 		entity = tile.ent();
-        Draw.rect(this.animRegion[entity.getTicking()], tile.drawx(), tile.drawy());
+        Draw.rect(this.animRegion[entity.getTicking()-1], tile.drawx(), tile.drawy());
     }
 });
 changerturret.breakSound = Sounds.bang;

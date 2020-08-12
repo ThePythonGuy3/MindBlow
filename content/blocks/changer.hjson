@@ -1,5 +1,5 @@
 health: 100
-size: 2
+size: 3
 name: Team bomb
 description: Transforms the blocks in its range to your team.
 update: true
@@ -8,7 +8,7 @@ rebuildable: false
 breakable: false
 requirements: [
   plastanium/50
-  zinc/60
+  brass/60
   graphite/30
   thorium/50
 ]

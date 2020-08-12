@@ -22,10 +22,11 @@ const burnerturret = extendContent(PowerTurret, "burner", {
 		this.region = Core.atlas.find(this.name);
 	},
 	generateIcons: function(){
-	return [
-		Core.atlas.find("block-1"),
-		Core.atlas.find(this.name + "-ghost")
-	];},
+		return [
+			Core.atlas.find("block-1"),
+			Core.atlas.find(this.name + "-ghost")
+		];
+	},
 	update(tile){
 		this.super$update(tile);
 		tile.entity.rotation = tile.rotation()*90;

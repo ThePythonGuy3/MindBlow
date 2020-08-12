@@ -23,7 +23,7 @@ ammo: {
 }
 }
 requirements: [
-  zinc/200
+  brass/200
   copper/70
   thorium/30
   surge-alloy/100

@@ -1,0 +1,6 @@
+type: material
+name: Brass
+description: A very hard alloy made with copper and zinc.
+hardness: 2
+cost: 2
+color: edbb32

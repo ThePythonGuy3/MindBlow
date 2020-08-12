@@ -1,3 +1,3 @@
 // wavy
-require("blocks/turret/wavy")
+require("blocks/turret/magic-turret")
 

@@ -7,11 +7,10 @@ reload: 100
 range: 300
 inaccuracy: 0
 rotatespeed: 15
-shootSound: stings
+shootSound: shoot
 ammo: {
   zinc: {
     type: BasicBulletType
-    bulletSprite: mindblow-sting-bullet-zinc
     ammoMultiplier: 1
     lifetime: 100
     speed: 4
@@ -20,7 +19,6 @@ ammo: {
   }
   surge-alloy: {
     type: BasicBulletType
-    bulletSprite: mindblow-sting-bullet-surge
     ammoMultiplier: 1
     lifetime: 100
     speed: 4
@@ -31,8 +29,7 @@ ammo: {
   }
   blast-compound: {
     type: BasicBulletType
-    bulletSprite: mindblow-sting-bullet-blast
-    incendAmount: 5
+    incendAmount: 2
     ammoMultiplier: 1
     lifetime: 100
     speed: 4

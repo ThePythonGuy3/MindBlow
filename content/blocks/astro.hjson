@@ -1,0 +1,12 @@
+name: Astro
+description: A turret that comes directly from space
+update: true
+health: 1200
+size: 6
+requirements: [
+	silicon/50
+	phase-fabric/35
+	plastanium/20
+]
+category: turret
+research: duo

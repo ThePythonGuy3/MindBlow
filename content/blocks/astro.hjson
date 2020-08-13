@@ -4,9 +4,10 @@ update: true
 health: 1200
 size: 6
 requirements: [
-	silicon/50
-	phase-fabric/35
+	silicon/120
+	phase-fabric/50
 	plastanium/20
+	brass/130
 ]
 category: turret
 research: duo

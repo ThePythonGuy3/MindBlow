@@ -191,7 +191,7 @@ wallchangerBullet.hitEffect = newEffect(13, e => {
 	elib.outlineCircle(e.x, e.y, Color.valueOf("e8af3c"), e.fout() * 4, e.fin() * 13);
 	elib.outlineCircle(e.x, e.y, Color.valueOf("ffee36"), e.fout() * 4, e.fin() * 10);
 });
-const magicTurret = extendContent(DoubleTurret, "magic-turret", {
+const magicTurret = extendContent(ItemTurret, "magic-turret", {
   init(){
     this.ammo(
       Items.metaglass, magicBulletmg,

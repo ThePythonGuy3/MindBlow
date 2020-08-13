@@ -12,5 +12,5 @@ requirements: [
   graphite/30
   thorium/50
 ]
-category: turret
-research: swarmer
+category: upgrade
+research: overdrive-projector

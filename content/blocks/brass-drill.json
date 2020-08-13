@@ -1,6 +1,6 @@
 {
 	"name": "Brass drill",
-	"description": "A super small drill that uses zinc to produce movement from power.",
+	"description": "A super small drill that uses Brass to produce movement from power.",
 	"type": "Drill",
 	"size": 1,
 	"tier": 5,

@@ -16,21 +16,24 @@ burnBullet.pierce = true;
 burnBullet.shootEffect = Fx.shootPyraFlame;
 burnBullet.smokeEffect = Fx.none;
 
-const burnerturret = extendContent(PowerTurret, "burner", {
-	load(){
-		this.super$load();
-		this.region = Core.atlas.find(this.name);
-	},
-	generateIcons: function(){
-		return [
-			Core.atlas.find("block-1"),
-			Core.atlas.find(this.name + "-ghost")
-		];
-	},
-	update(tile){
-		this.super$update(tile);
-		tile.entity.rotation = tile.rotation()*90;
-		this.updateShooting(tile);
-	}
+const burnerturret = extendContent(ItemTurret, "burner", {
+    update(tile){
+        this.super$update(tile);
+        tile.entity.rotation = tile.rotation()*90;
+        if(this.hasAmmo(tile)){
+  			this.updateShooting(tile);
+		}
+    },
+    drawRequestRegion(req, list){
+        reg = this.icon(Cicon.full);
+        Draw.rect(this.icon(Cicon.full), req.drawx(), req.drawy(),
+            reg.getWidth() * req.animScale * Draw.scl,
+            reg.getHeight() * req.animScale * Draw.scl,
+            !this.rotate ? 0 : req.rotation * 90-90);
+
+        if(req.hasConfig){
+            drawRequestConfig(req, list);
+        }
+    }
 });
-burnerturret.shootType = burnBullet;
+burnerturret.ammo(Items.coal, Bullets.pyraFlame, Items.pyratite, burnBullet);

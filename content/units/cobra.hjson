@@ -1,10 +1,10 @@
 flying: true
-name: Macer
-description: Deals almost no damage, but your units will get unusable for some time if they touch its bullet. Be careful with its head attacks.
+name: Cobra
+description: Shoots astonishing bullets, making your units will unusable for some time. Be careful with its head attacks.
 health: 7000
 mass: 25
 hitsize: 20
-speed: 4
+speed: 1
 drag: 0.001
 maxVelocity: 4.2
 rotatespeed: 0.03

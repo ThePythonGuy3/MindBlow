@@ -57,6 +57,6 @@ macer.weapon = macerBlaster;
 macer.shootCone = 150;
 macer.rotateWeapon = true;
 macer.create(prov(() => {
-	unit = wormlib.newBase(18, 11.5, 0.01, 120, true, null, null, null, null, null, []);
+	unit = wormlib.newBase(18, 11.5, 0.01, 260, true, null, null, null, null, null, []);
 	return unit;
 }));

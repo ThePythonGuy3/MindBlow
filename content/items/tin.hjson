@@ -1,6 +1,0 @@
-type: resource
-name: Tin
-description: A very soft metal.
-hardness: 1
-cost: 2
-color: dadada

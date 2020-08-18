@@ -5,7 +5,7 @@ Adds a vanilla expansion to mindustry. It adds multiple drills, turrets, resourc
 
 > **ThePythonGuy.**
 
-> Thanks to **GlennFolker** for effectlib
+> Thanks to **GlennFolker** and **JerichoFletcher** for various libraries
 
 > Thanks to **sk7725** for making the ui health circle
 

@@ -1,0 +1,14 @@
+flying: true
+name: Python
+description: The mighty snake, appears in humid zones. Its bullets are poisonous, beware.
+health: 15000
+mass: 5
+hitsize: 20
+speed: 2
+drag: 0.001
+maxVelocity: 2.2
+rotatespeed: 0.03
+baseRotateSpeed: 0.01
+attackLength: 200
+engineOffset: 6
+engineSize: 2.4

@@ -1,0 +1,6 @@
+type: resource
+name: Zinc
+description: A rare metal.
+hardness: 2
+cost: 2
+color: d4d4d4

@@ -1,7 +1,7 @@
 name: "MindBlow",
 author: "ThePythonGuy",
 description: "Adds a vanilla expansion to mindustry. It adds multiple drills, turrets, resources, and some units. Thanks to GrimSoul and SteelBlue8 for most of the sprites!",
-version: 3.0,
+version: 3.1,
 minGameVersion: "104",
 dependencies: []
 

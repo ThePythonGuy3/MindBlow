@@ -1,9 +1,0 @@
-name: radiation emitter.
-description: HELL.
-health: 50
-size: 2
-requirements: [
-	copper/1
-]
-category: turret
-update: true

@@ -1,7 +1,7 @@
 
 const wormlib = require("mindblow/worm-base");
 
-const macer = extendContent(UnitType, "macer", {
+const cobra = extendContent(UnitType, "cobra", {
 	load(){
 		this.super$load();
 		this.region = Core.atlas.find(this.name);
@@ -27,36 +27,36 @@ const macer = extendContent(UnitType, "macer", {
 	}
 });
 
-const macerBullet = extend(BasicBulletType, {});
-macerBullet.keepVelocity = false;
-macerBullet.damage = 1;
-macerBullet.speed = 6;
-macerBullet.lifetime = 60;
-macerBullet.status = new StatusEffect("astonished");
-macerBullet.status.speedMultiplier = 0;
-macerBullet.status.damage = 0.6;
-macerBullet.status.color = Team.crux.color;
-macerBullet.status.effect = Fx.hitFuse;
-macerBullet.statusDuration = 150;
-macerBullet.hitEffect = macerBullet.status.effect;
-macerBullet.bulletShrink = 0;
-macerBullet.bulletWidth = 10;
-macerBullet.bulletHeight = 14;
+const cobraBullet = extend(BasicBulletType, {});
+cobraBullet.keepVelocity = false;
+cobraBullet.damage = 1;
+cobraBullet.speed = 6;
+cobraBullet.lifetime = 60;
+cobraBullet.status = new StatusEffect("astonished");
+cobraBullet.status.speedMultiplier = 0;
+cobraBullet.status.damage = 0.6;
+cobraBullet.status.color = Team.crux.color;
+cobraBullet.status.effect = Fx.hitFuse;
+cobraBullet.statusDuration = 150;
+cobraBullet.hitEffect = cobraBullet.status.effect;
+cobraBullet.bulletShrink = 0;
+cobraBullet.bulletWidth = 10;
+cobraBullet.bulletHeight = 14;
 
-const macerBlaster = extendContent(Weapon, "macer-blaster", {
+const cobraBlaster = extendContent(Weapon, "cobra-blaster", {
 	load(){
-		this.region = Core.atlas.find("mindblow-macer-blaster");
+		this.region = Core.atlas.find("mindblow-cobra-blaster");
 	}
 });
-macerBlaster.alternate = false;
-macerBlaster.reload = 60;
-macerBlaster.bullet = macerBullet;
-macerBlaster.shootSound = Sounds.shootSnap;
+cobraBlaster.alternate = false;
+cobraBlaster.reload = 60;
+cobraBlaster.bullet = cobraBullet;
+cobraBlaster.shootSound = Sounds.shootSnap;
 
-macer.weapon = macerBlaster;
-macer.shootCone = 150;
-macer.rotateWeapon = true;
-macer.create(prov(() => {
+cobra.weapon = cobraBlaster;
+cobra.shootCone = 150;
+cobra.rotateWeapon = true;
+cobra.create(prov(() => {
 	unit = wormlib.newBase(18, 11.5, 0.01, 260, true, null, null, null, null, null, []);
 	return unit;
 }));

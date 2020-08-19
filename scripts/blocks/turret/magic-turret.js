@@ -121,7 +121,7 @@ const wallchangerBullet = extend(BasicBulletType, {
     hitTile: function(b, tile){
         this.hit(b);
         if(tile.entity != null){
-        	if(tile.block() == "plastanium-wall"){
+        	/*if(tile.block() == "plastanium-wall"){
         		Call.setTile(tile, Blocks.titaniumWall, tile.getTeam(), 0);
         	} else if (tile.block() == "thorium-wall"){
         		Call.setTile(tile, Blocks.plastaniumWall, tile.getTeam(), 0);
@@ -146,8 +146,21 @@ const wallchangerBullet = extend(BasicBulletType, {
         	} else if (tile.block() == "phase-wall-large"){
         		b.getOwner().damage(b.getOwner().maxHealth() * 0.3);
         		Call.setTile(tile, Blocks.plastaniumWallLarge, tile.getTeam(), 0);
-        	};
-        	
+        	};*/
+		var blocks = [];
+		var finalblocks = [];
+        	for(i = 0; i < Vars.content.blocks().size; i++){
+			var block = Vars.content.blocks().get(i);
+			if(block == null || !(block instanceof Wall)) continue;
+			blocks.push(block);
+		};
+		function compare(a, b){
+			return a - b;
+		};
+		blocks.sort(compare);
+		if(tile != null && tile.block() in blocks && blocks.indexOf(tile.block())!=0 && tile.block().size == blocks[blocks.indexOf(tile.block())-1].size){
+			Call.setTile(tile, blocks[blocks.indexOf(tile.block())-1], tile.getTeam(), 0);
+		}
         };
     },
     draw(b){
@@ -161,6 +174,7 @@ const wallchangerBullet = extend(BasicBulletType, {
     }
 	}
 });
+
 wallchangerBullet.speed = 7;
 wallchangerBullet.damage = 60;
 wallchangerBullet.lifetime = 100;

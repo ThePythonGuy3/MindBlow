@@ -36,31 +36,33 @@ const itemshop = extendContent(Block, "itemshop", {
 			dialog.setFillParent(false);
 			dialog.cont.add("[accent]AnuCoins:[] " + tile.ent().getAcoins());
 			dialog.cont.row();
-			dialog.cont.pane(cons(tb => {
-				for(i = 0; i < Vars.content.items().size; i++){
-					var item = Vars.content.items().get(i)
-					if(item == null) continue;
-					var price = Mathf.round(scorelib.scores().get(item))*20;
-					tb.addImageTextButton(item.localizedName + "[accent] x20[]\nPrice: " + price + " [accent]AnuCoins[]",  new TextureRegionDrawable(item.icon(Cicon.large)), run(()=>{
-						//nothing
-					})).growX();
+			dialog.cont.table(cons(tab => {
+				tab.pane(cons(tb => {
+					for(i = 0; i < Vars.content.items().size; i++){
+						var item = Vars.content.items().get(i)
+						if(item == null) continue;
+						var price = Mathf.round(scorelib.scores().get(item))*20;
+						tb.addImageTextButton(item.localizedName + "[accent] x20[]\nPrice: " + price + " [accent]AnuCoins[]",  new TextureRegionDrawable(item.icon(Cicon.large)), run(()=>{
+							//nothing
+						})).growX();
 					
-					tb.row();
-				};
-			})).growX().width(Core.graphics.width/3).height(Core.graphics.height*0.8);
-			dialog.cont.pane(cons(tb => {
-				var units = Vars.content.units();
-            	for(i = 0; i < units.size; i++){
-					var unit = units.get(i)
-					if(unit == null) continue;
-					var price = Mathf.round(unit.health*unit.weapon.bullet.damage/20);
-					tb.addImageTextButton(unit.localizedName + "[accent] x20[]\nPrice: " + price + " [accent]AnuCoins[]",  new TextureRegionDrawable(unit.icon(Cicon.medium)), run(()=>{
-						//nothing
-					})).growX();
+						tb.row();
+					};
+				})).growX().width(Core.graphics.width/3).height(Core.graphics.height*0.8);
+				tab.pane(cons(tb => {
+					var units = Vars.content.units();
+            		for(i = 0; i < units.size; i++){
+						var unit = units.get(i)
+						if(unit == null) continue;
+						var price = Mathf.round(unit.weapon.bullet.damage>0?unit.health/2+unit.weapon.bullet.damage*50:unit.health/2);
+						tb.addImageTextButton(unit.localizedName + "\nPrice: " + price + " [accent]AnuCoins[]",  new TextureRegionDrawable(unit.icon(Cicon.medium), 1/(new TextureRegionDrawable(unit.icon(Cicon.medium)).imageSize()/64)), run(()=>{
+							//nothing
+						})).growX();
 					
-					tb.row();
-				};
-			})).growX().width(Core.graphics.width/3).height(Core.graphics.height*0.8);
+						tb.row();
+					};
+				})).growX().width(Core.graphics.width/3).height(Core.graphics.height*0.8);
+			}));
 			dialog.addCloseButton();
 			dialog.show();
 		}));	

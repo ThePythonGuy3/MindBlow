@@ -12,8 +12,7 @@ const itemshop = extendContent(Block, "itemshop", {
 		this.baseRegion = Core.atlas.find(this.name + "-base");
 	},
 	draw(tile){
-		if(Vars.player == null || Vars.net.client()) return;
-        var tile = Vars.world.ltileWorld(Vars.player.shootX(), Vars.player.shootY());
+        var tile = Vars.world.ltileWorld(Vars.control.input.getMouseX(), Vars.control.input.getMouseY());
 		if(tile != null && tile.block() == this && tile.getTeam() == Vars.player.getTeam()){
 			this.regCount += 0.001;
 			if(this.regCount>10){

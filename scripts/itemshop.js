@@ -48,6 +48,19 @@ const itemshop = extendContent(Block, "itemshop", {
 					tb.row();
 				};
 			})).growX().width(Core.graphics.width/3).height(Core.graphics.height*0.8);
+			dialog.cont.pane(cons(tb => {
+				var units = Vars.content.units();
+            	for(i = 0; i < units.size; i++){
+					var unit = units.get(i)
+					if(unit == null) continue;
+					var price = Mathf.round(unit.health*unit.weapon.bullet.damage/20);
+					tb.addImageTextButton(unit.localizedName + "[accent] x20[]\nPrice: " + price + " [accent]AnuCoins[]",  new TextureRegionDrawable(unit.icon(Cicon.medium)), run(()=>{
+						//nothing
+					})).growX();
+					
+					tb.row();
+				};
+			})).growX().width(Core.graphics.width/3).height(Core.graphics.height*0.8);
 			dialog.addCloseButton();
 			dialog.show();
 		}));	

@@ -32,18 +32,19 @@ const itemshop = extendContent(Block, "itemshop", {
 		table.addImageButton(Icon.box, Styles.clearTransi, run(()=>{
 			const dialog = new FloatingDialog("Item Shop");
 			dialog.setFillParent(false);
-			dialog.cont.pane(cons(table => {
+			dialog.cont.pane(cons(tb => {
 				for(i = 0; i < Vars.content.items().size; i++){
 					var item = Vars.content.items().get(i)
 					if(item == null) continue;
 					var price = item.hardness*item.cost;
-					button = table.addTextImageButton(item.localizedName + "\nPrice: " + price + "[accent]AnuCoins[]", Tex.whiteui, run(()=>{
+					tb.addImageTextButton(item.localizedName + "\nPrice: " + price + "[accent]AnuCoins[]", Icon.save, run(()=>{
 						//nothing
 					}));
 					//button.getStyle().imageUp = new TextureRegionDrawable(item.icon(Cicon.xlarge));
-					table.row();
+					tb.row();
 				};
 			}));
+			dialog.addCloseButton();
 			dialog.show();
 		}));	
 	}

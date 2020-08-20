@@ -9,7 +9,7 @@ const itemshop = extendContent(Block, "itemshop", {
 			this.animRegions.push(Core.atlas.find(this.name + "-" + i));
 		};
 		this.regCount = 0;
-		this.baseRegion = 
+		this.baseRegion = Core.atlas.find(this.name + "-base");
 	},
 	draw(tile){
         var tile = Vars.world.ltileWorld(Vars.input.getMouseX(), Vars.input.getMouseY());

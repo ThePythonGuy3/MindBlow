@@ -34,6 +34,8 @@ const itemshop = extendContent(Block, "itemshop", {
 		table.addImageButton(Icon.box, Styles.clearTransi, run(()=>{
 			const dialog = new FloatingDialog("Item Shop");
 			dialog.setFillParent(false);
+			dialog.cont.add("[accent]AnuCoins:[] " + tile.ent().getAcoins());
+			dialog.cont.row();
 			dialog.cont.pane(cons(tb => {
 				for(i = 0; i < Vars.content.items().size; i++){
 					var item = Vars.content.items().get(i)
@@ -45,9 +47,21 @@ const itemshop = extendContent(Block, "itemshop", {
 					
 					tb.row();
 				};
-			})).width(Core.graphics.width/3);
+			})).growX().width(Core.graphics.width/3).height(Core.graphics.height*0.8);
 			dialog.addCloseButton();
 			dialog.show();
 		}));	
 	}
+});
+itemshop.entityType = prov(() => {
+	const entity = extend(TileEntity, {
+		getAcoins: function(){
+			return this._aco;
+		},
+		setAcoins: function(val){
+			this._aco = val;
+		}
+	});
+	entity.setAcoins(0);
+	return entity;
 });

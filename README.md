@@ -13,4 +13,6 @@ Adds a vanilla expansion to mindustry. It adds multiple drills, turrets, resourc
 
 > Thanks to **Txar** for spriting and ideas!
 
+> Thanks to **EyeOfDarkness** for item score library!
+
 If you think its worth it, star this repository :D

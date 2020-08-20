@@ -1,6 +1,8 @@
+const scorelib = require("mindblow/itemscorelib");
 const itemshop = extendContent(Block, "itemshop", {
-	canBreak(){
-		return false;
+	init(){
+		this.super$init();
+		scorelib.loadItems();
 	},
 	load(){
 		this.region = Core.atlas.find(this.name + "-icon");
@@ -36,14 +38,14 @@ const itemshop = extendContent(Block, "itemshop", {
 				for(i = 0; i < Vars.content.items().size; i++){
 					var item = Vars.content.items().get(i)
 					if(item == null) continue;
-					var price = item.hardness*item.cost;
-					tb.addImageTextButton(item.localizedName + "\nPrice: " + price + "[accent]AnuCoins[]", Icon.save, run(()=>{
+					var price = Mathf.round(scorelib.scores().get(item))*20;
+					tb.addImageTextButton(item.localizedName + "[accent] x20[]\nPrice: " + price + " [accent]AnuCoins[]",  new TextureRegionDrawable(item.icon(Cicon.large)), run(()=>{
 						//nothing
-					}));
-					//button.getStyle().imageUp = new TextureRegionDrawable(item.icon(Cicon.xlarge));
+					})).growX();
+					
 					tb.row();
 				};
-			}));
+			})).width(Core.graphics.width/3);
 			dialog.addCloseButton();
 			dialog.show();
 		}));	

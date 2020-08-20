@@ -37,9 +37,10 @@ const itemshop = extendContent(Block, "itemshop", {
 					var item = Vars.content.items().get(i)
 					if(item == null) continue;
 					var price = item.hardness*item.cost;
-					table.addImageTextButton(item.localizedName + "\nPrice: " + price + "[accent]AnuCoins[]", item.icon(Cicon.large),run(()=>{
+					button = table.addImageTextButton(item.localizedName + "\nPrice: " + price + "[accent]AnuCoins[]", Tex.whiteui, run(()=>{
 						//nothing
 					}));
+					button.getStyle().imageUp = new TextureRegionDrawable(item.icon(Cicon.xlarge));
 					table.row();
 				};
 			}));

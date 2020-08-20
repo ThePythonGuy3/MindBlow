@@ -1,0 +1,15 @@
+health: 4000
+size: 3
+name: Item Shop
+description: Lets you buy and sell items, uses AnuCoins.
+update: true
+hasItems: true
+itemCapacity: 300
+targetable: false
+configurable: true
+requirements: [
+  copper/150
+  zinc/10
+]
+category: effect
+research: core-shard

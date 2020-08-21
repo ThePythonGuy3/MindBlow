@@ -1,4 +1,3 @@
-const elib = require("effectlib");
 var placingabi = true;
 const changerBullet = extend(BasicBulletType, {
     hitTile: function(b, tile){
@@ -18,7 +17,11 @@ changerBullet.smokeEffect = Fx.none;
 changerBullet.shootEffect = Fx.none;
 
 const explosioneffectforthis = newEffect(20, e => {
-    elib.outlineCircle(e.x, e.y, Color.valueOf("32f0ff"), e.fout() * 5, e.fin() * 60);
+    Draw.color("aaffaa")
+    Lines.stroke(e.fin()*5);
+    Lines.circle(e.x, e.y, e.fin() * 60);
+    Lines.stroke(1);
+    Draw.reset();
 });
 const changerturret = extendContent(Block, "changer", {
     onPlaced(){

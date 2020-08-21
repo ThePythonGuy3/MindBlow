@@ -5,29 +5,37 @@ const itemshop = extendContent(Block, "itemshop", {
 		scorelib.loadItems();
 	},
 	load(){
-		this.region = Core.atlas.find(this.name + "-icon");
-		this.animRegions = [];
-		for(i = 0; i <= 11; i++){
-			this.animRegions.push(Core.atlas.find(this.name + "-" + i));
-		};
-		this.regCount = 0;
-		this.baseRegion = Core.atlas.find(this.name + "-base");
+		this.super$load();
+		this.itemFx = newEffect(20, e => {
+			Draw.color(Color.valueOf("ff0000").shiftHue(Time.time()));
+			Fill.circle(e.x, e.y, e.fout()*2);
+			Draw.color();
+		});
 	},
 	draw(tile){
-        var tile = Vars.world.ltileWorld(Vars.control.input.getMouseX(), Vars.control.input.getMouseY());
-		if(tile != null && tile.block() == this && tile.getTeam() == Vars.player.getTeam()){
-			this.regCount += 0.001;
-			if(this.regCount>10){
-				this.regCount = 11;
-			};
-		} else {
-			this.regCount += -0.001;
-			if(this.regCount<1){
-				this.regCount = 0;
-			};
-		}
-		Draw.rect(this.baseRegion, tile.drawx(), tile.drawy());
-		Draw.rect(this.animRegions[Mathf.round(this.regCount)], tile.drawx(), tile.drawy());
+		entity = tile.ent();
+		this.super$draw(tile);
+		var ang = Time.time()*2+Mathf.sinDeg(Time.time())*20;
+		var x1 = Angles.trnsx(ang, 0, 8 + Mathf.sinDeg(Time.time())*2);
+		var y1 = Angles.trnsy(ang, 0, 8 + Mathf.sinDeg(Time.time())*2);
+		var x2 = Angles.trnsx(ang, 0, -8 - Mathf.sinDeg(Time.time())*2);
+		var y2 = Angles.trnsy(ang, 0, -8 - Mathf.sinDeg(Time.time())*2);
+		var x3 = Angles.trnsx(ang, 8 + Mathf.sinDeg(Time.time())*2, 0);
+		var y3 = Angles.trnsy(ang, 8 + Mathf.sinDeg(Time.time())*2, 0);
+		var x4 = Angles.trnsx(ang, -8 - Mathf.sinDeg(Time.time())*2, 0);
+		var y4 = Angles.trnsy(ang, -8 - Mathf.sinDeg(Time.time())*2, 0);
+		var tx = tile.drawx();
+		var ty = tile.drawy();
+		/*Effects.effect(this.itemFx, tx + x1, ty + y1);
+		Effects.effect(this.itemFx, tx + x2, ty + y2);
+		Effects.effect(this.itemFx, tx + x3, ty + y3);
+		Effects.effect(this.itemFx, tx + x4, ty + y4);*/
+		
+		Draw.rect("item-copper-small", tx + x1, ty + y1);
+		Draw.rect("item-lead-small", tx + x2, ty + y2);
+		Draw.rect("item-metaglass-small", tx + x3, ty + y3);
+		Draw.rect("item-silicon-small", tx + x4, ty + y4);
+		
 	},
 	buildConfiguration(tile, table){
 		entity = tile.ent();
@@ -65,37 +73,26 @@ const itemshop = extendContent(Block, "itemshop", {
                             t.addImage(unit.icon(Cicon.medium)).size(40).padRight(5);
                             t.add(unit.localizedName + "\nPrice: " + price + " [accent]AnuCoins[]");
                         }), run(() => {
-                            entity.setAcoins(entity.getAcoins-price);
-                            var un = unit.create(tile.getTeam());
-                            var rnd = Mathf.random()*360;
-                            var x = tile.drawx() + Angles.trnsx(rnd, 0, 20);
-                            var y = tile.drawy() + Angles.trnsy(rnd, 0, 20);
-                            un.set(x, y);
-                            un.add();
+                        	if(entity.getAcoins()>=price){
+                        		Vars.ui.showConfirm("Confirm Your Purchase", "Are you sure you want to buy [accent]" + unit.localizedName + " []for " + price + " [accent]AnuCoins[]?", run(()=>{
+                            		entity.setAcoins(entity.getAcoins()-price);
+                            		var un = unit.create(tile.getTeam());
+                            		var rnd = Mathf.random()*360;
+                            		var x = tile.drawx() + Angles.trnsx(rnd, 0, 20);
+                            		var y = tile.drawy() + Angles.trnsy(rnd, 0, 20);
+                            		un.set(x, y);
+                            		un.add();
+                            		dialog.close();
+                            	}));
+                        	} else {
+                        		Vars.ui.showErrorMessage("Not Enough AnuCoins");
+                        	}
                         })).growX();
                     
                         tb.row();
 					}
             		for(i = 0; i < units.size; i++){
 						summonButton(tb, i);
-						/*if(unit == null) continue;
-						unlist.push(unit);
-						var price = Mathf.round(unit.health+unit.weapon.bullet.damage*50);
-						tb.addButton(cons(t => {
-                    		t.left();
-                    		t.addImage(unit.icon(Cicon.medium)).size(40).padRight(5);
-                    		t.add(unit.localizedName + "\nPrice: " + price + " [accent]AnuCoins[]");
-                		}), run(() => {
-                    		entity.setAcoins(entity.getAcoins-price);
-                    		var un = unit.create(tile.getTeam());
-                    		var rnd = Mathf.random()*360;
-                    		var x = tile.drawx() + Angles.trnsx(rnd, 0, 20);
-                    		var y = tile.drawy() + Angles.trnsy(rnd, 0, 20);
-                    		un.set(x, y);
-                    		un.add();
-						})).growX();
-					
-						tb.row();*/
 					};
 				})).growX().width(Core.graphics.width/3).height(Core.graphics.height*0.8);
 			}));
@@ -116,3 +113,4 @@ itemshop.entityType = prov(() => {
 	entity.setAcoins(0);
 	return entity;
 });
+itemshop.fxtimer = itemshop.timers++;

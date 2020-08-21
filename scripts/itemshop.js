@@ -54,10 +54,31 @@ const itemshop = extendContent(Block, "itemshop", {
 				})).growX().width(Core.graphics.width/3).height(Core.graphics.height*0.8);
 				tab.pane(cons(tb => {
 					var units = Vars.content.units();
-					var unlist = []; 
-            		for(i = 0; i < units.size; i++){
+					var unlist = [];
+					function summonButton(tb, i){
 						var unit = units.get(i)
-						if(unit == null) continue;
+                        if(unit == null) return;
+                        unlist.push(unit);
+                        var price = Mathf.round(unit.health+unit.weapon.bullet.damage*50);
+                        tb.addButton(cons(t => {
+                            t.left();
+                            t.addImage(unit.icon(Cicon.medium)).size(40).padRight(5);
+                            t.add(unit.localizedName + "\nPrice: " + price + " [accent]AnuCoins[]");
+                        }), run(() => {
+                            entity.setAcoins(entity.getAcoins-price);
+                            var un = unit.create(tile.getTeam());
+                            var rnd = Mathf.random()*360;
+                            var x = tile.drawx() + Angles.trnsx(rnd, 0, 20);
+                            var y = tile.drawy() + Angles.trnsy(rnd, 0, 20);
+                            un.set(x, y);
+                            un.add();
+                        })).growX();
+                    
+                        tb.row();
+					}
+            		for(i = 0; i < units.size; i++){
+						summonButton(tb, i);
+						/*if(unit == null) continue;
 						unlist.push(unit);
 						var price = Mathf.round(unit.health+unit.weapon.bullet.damage*50);
 						tb.addButton(cons(t => {
@@ -74,7 +95,7 @@ const itemshop = extendContent(Block, "itemshop", {
                     		un.add();
 						})).growX();
 					
-						tb.row();
+						tb.row();*/
 					};
 				})).growX().width(Core.graphics.width/3).height(Core.graphics.height*0.8);
 			}));

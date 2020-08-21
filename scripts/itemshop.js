@@ -46,8 +46,32 @@ const itemshop = extendContent(Block, "itemshop", {
 			dialog.cont.row();
 			dialog.cont.table(cons(tab => {
 				tab.pane(cons(tb => {
-					for(i = 0; i < Vars.content.items().size; i++){
+					function itemButton(tb, i){
 						var item = Vars.content.items().get(i)
+                        if(item == null) return;
+						var price = Mathf.round(scorelib.scores().get(item))*20;
+                        tb.addButton(cons(t => {
+                            t.left();
+                            t.addImage(item.icon(Cicon.medium)).size(40).padRight(5);
+                            t.add(item.localizedName + "[accent] x20[]\nPrice: " + price + " [accent]AnuCoins[]");
+                        }), run(() => {
+                        	if(entity.getAcoins()>=price){
+                        		Vars.ui.showConfirm("Confirm Your Purchase", "Are you sure you want to buy [accent]" + item.localizedName + " x20[]\nFor " + price + " [accent]AnuCoins[]?", run(()=>{
+                            		entity.setAcoins(entity.getAcoins()-price);
+                            		entity.items.add(item, 20);
+                            		dialog.hide();
+                            		Vars.ui.showInfoToast("[accent]Thanks for your purchase![]\nThe items are inside the shop. Use unloaders to get them.", 5);
+                            	}));
+                        	} else {
+                        		Vars.ui.showErrorMessage("Not Enough AnuCoins");
+                        	}
+                        })).growX();
+                    
+                        tb.row();
+					}
+					for(i = 0; i < Vars.content.items().size; i++){
+						itemButton(tb, i);
+						/*var item = Vars.content.items().get(i)
 						if(item == null) continue;
 						var price = Mathf.round(scorelib.scores().get(item))*20;
 						tb.addButton(cons(t => {
@@ -57,7 +81,7 @@ const itemshop = extendContent(Block, "itemshop", {
                 		}), run(() => {
                     		//nothing
 						})).growX();
-						tb.row();
+						tb.row();*/
 					};
 				})).growX().width(Core.graphics.width/3).height(Core.graphics.height*0.8);
 				tab.pane(cons(tb => {
@@ -74,7 +98,7 @@ const itemshop = extendContent(Block, "itemshop", {
                             t.add(unit.localizedName + "\nPrice: " + price + " [accent]AnuCoins[]");
                         }), run(() => {
                         	if(entity.getAcoins()>=price){
-                        		Vars.ui.showConfirm("Confirm Your Purchase", "Are you sure you want to buy [accent]" + unit.localizedName + " []for " + price + " [accent]AnuCoins[]?", run(()=>{
+                        		Vars.ui.showConfirm("Confirm Your Purchase", "Are you sure you want to buy [accent]" + unit.localizedName + "[]\nFor " + price + " [accent]AnuCoins[]?", run(()=>{
                             		entity.setAcoins(entity.getAcoins()-price);
                             		var un = unit.create(tile.getTeam());
                             		var rnd = Mathf.random()*360;
@@ -82,7 +106,8 @@ const itemshop = extendContent(Block, "itemshop", {
                             		var y = tile.drawy() + Angles.trnsy(rnd, 0, 20);
                             		un.set(x, y);
                             		un.add();
-                            		dialog.close();
+                            		dialog.hide();
+                            		Vars.ui.showInfoToast("[accent]Thanks for your purchase![]", 5);
                             	}));
                         	} else {
                         		Vars.ui.showErrorMessage("Not Enough AnuCoins");

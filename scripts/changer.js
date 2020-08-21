@@ -18,7 +18,7 @@ changerBullet.shootEffect = Fx.none;
 
 const explosioneffectforthis = newEffect(20, e => {
     Draw.color(Color.valueOf("aaffaa"));
-    Lines.stroke(e.fin()*5);
+    Lines.stroke(e.fout()*5);
     Lines.circle(e.x, e.y, e.fin() * 60);
     Lines.stroke(1);
     Draw.reset();

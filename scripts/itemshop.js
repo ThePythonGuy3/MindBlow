@@ -91,7 +91,9 @@ const itemshop = extendContent(Block, "itemshop", {
 					};
 				})).growX()/*.width(Core.graphics.width/3).height(Core.graphics.height*0.8)*/;
 				if(Vars.mobile){
+					tab.add("");
 					tab.row();
+					tab.add("");
 				}
 				tab.pane(cons(tb => {
 					var units = Vars.content.units();
@@ -128,7 +130,7 @@ const itemshop = extendContent(Block, "itemshop", {
             		for(i = 0; i < units.size; i++){
 						summonButton(tb, i);
 					};
-				})).growX()/*.width(Core.graphics.width/3).height(Core.graphics.height*0.8)*/;
+				})).growX()/*height(Core.graphics.height*0.8)*/;
 			}));
 			dialog.cont.row();
 			dialog.cont.table(cons(tb=> {

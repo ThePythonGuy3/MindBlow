@@ -91,9 +91,11 @@ const itemshop = extendContent(Block, "itemshop", {
 					};
 				})).growX()/*.width(Core.graphics.width/3).height(Core.graphics.height*0.8)*/;
 				if(Vars.mobile){
+					tab.row();
 					tab.add("");
 					tab.row();
 					tab.add("");
+					tab.row();
 				}
 				tab.pane(cons(tb => {
 					var units = Vars.content.units();
@@ -180,6 +182,7 @@ const itemshop = extendContent(Block, "itemshop", {
 								isdialog.addCloseButton();
 								isdialog.show();
                 			}));
+                			tb.
                 		}));
                 		sdialog.row();
                 		sdialog.addCloseButton();

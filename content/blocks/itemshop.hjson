@@ -1,7 +1,7 @@
 health: 4000
 size: 3
-name: Item Shop
-description: Lets you buy and sell items, uses AnuCoins.
+name: Shop
+description: Lets you buy and sell stuff, uses AnuCoins.
 update: true
 hasItems: true
 itemCapacity: 300

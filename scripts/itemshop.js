@@ -39,10 +39,16 @@ const itemshop = extendContent(Block, "itemshop", {
 	},
 	buildConfiguration(tile, table){
 		entity = tile.ent();
+		var itemsel = Vars.content.items().get(0);
+        var itemam = 0;
 		table.addImageButton(Icon.box, Styles.clearTransi, run(()=>{
 			const dialog = new FloatingDialog("Item Shop");
-			dialog.setFillParent(false);
-			dialog.cont.add("[accent]AnuCoins:[] " + entity.getAcoins());
+			dialog.setFillParent(/*false*/true);
+			dialog.cont.table(cons(tb => {
+				tb.center();
+				tb.add("[accent]AnuCoins:[] " + entity.getAcoins());
+				tb.addImage(Core.atlas.find("mindblow-routercoin")).size(24).padLeft(5);
+			}));
 			dialog.cont.row();
 			dialog.cont.table(cons(tab => {
 				tab.pane(cons(tb => {
@@ -83,7 +89,7 @@ const itemshop = extendContent(Block, "itemshop", {
 						})).growX();
 						tb.row();*/
 					};
-				})).growX().width(Core.graphics.width/3).height(Core.graphics.height*0.8);
+				})).growX().width(Core.graphics.width/3)/*.height(Core.graphics.height*0.8)*/;
 				tab.pane(cons(tb => {
 					var units = Vars.content.units();
 					var unlist = [];
@@ -121,7 +127,63 @@ const itemshop = extendContent(Block, "itemshop", {
 					};
 				})).growX().width(Core.graphics.width/3).height(Core.graphics.height*0.8);
 			}));
-			dialog.addCloseButton();
+			dialog.cont.row();
+			dialog.cont.table(cons(tb=> {
+				tb.addButton(cons(t => {
+					t.center();
+					t.add("Back");
+                }), run(() => {
+                	dialog.hide();
+                }));
+                tb.addButton(cons(t => {
+					t.center();
+					t.add("Sell Items");
+                }), run(() => {
+                	function buildSell(){
+                		const sdialog = new FloatingDialog("Sell Items");
+                		var core = Vars.state.teams.get(Vars.player.getTeam()).cores.first();
+                		
+                		sdialog.setFillParent(false);
+                		sdialog.cont.table(cons(tb => {
+                			tb.addButton(cons(t => {
+                				t.center();
+                				t.addImage(itemsel.icon(Cicon.medium)).size(48);
+                			}), run(() => {
+                				const isdialog = new FloatingDialog("Select Item");
+                				isdialog.setFillParent(false);
+                				function itemSelectButton(tb, i){
+									var item = Vars.content.items().get(i)
+                        			if(item == null) return;
+                        			tb.addButton(cons(t => {
+                            			t.left();
+                            			t.addImage(item.icon(Cicon.medium)).size(40).padRight(5);
+                            			t.add(item.localizedName);
+                        			}), run(() => {
+                        				itemsel = item;
+                        				isdialog.hide();
+                        				sdialog.hide();
+                        				buildSell();
+                        			})).growX();
+                        			tb.row();
+								}
+								isdialog.cont.pane(cons(tb => {
+                					for(i = 0; i < Vars.content.items().size; i++){
+										itemSelectButton(tb, i);
+									};
+								})).growX().height(Core.graphics.height*0.6);
+								isdialog.row();
+								isdialog.addCloseButton();
+								isdialog.show();
+                			}));
+                		}));
+                		sdialog.row();
+                		sdialog.addCloseButton();
+                		sdialog.show();
+                	}
+                	buildSell();
+                }));
+			}));
+			
 			dialog.show();
 		}));	
 	}

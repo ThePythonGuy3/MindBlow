@@ -42,7 +42,7 @@ const itemshop = extendContent(Block, "itemshop", {
 		var itemsel = Vars.content.items().get(0);
         var itemam = 0;
 		table.addImageButton(Icon.box, Styles.clearTransi, run(()=>{
-			const dialog = new FloatingDialog("Item Shop");
+			const dialog = new FloatingDialog("Shop");
 			dialog.setFillParent(/*false*/true);
 			dialog.cont.table(cons(tb => {
 				tb.center();

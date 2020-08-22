@@ -90,6 +90,9 @@ const itemshop = extendContent(Block, "itemshop", {
 						tb.row();*/
 					};
 				})).growX()/*.width(Core.graphics.width/3).height(Core.graphics.height*0.8)*/;
+				if(Vars.mobile){
+					tab.row();
+				}
 				tab.pane(cons(tb => {
 					var units = Vars.content.units();
 					var unlist = [];

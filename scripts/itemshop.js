@@ -6,16 +6,16 @@ const itemshop = extendContent(Block, "itemshop", {
 	},
 	load(){
 		this.super$load();
-		this.itemFx = newEffect(20, e => {
-			Draw.color(Color.valueOf("ff0000").shiftHue(Time.time()));
-			Fill.circle(e.x, e.y, e.fout()*2);
-			Draw.color();
+		this.receiveFx = newEffect(20, e => {
+			Draw.alpha(e.fin()+0.1);
+			Draw.rect(e.data, e.x, e.y, e.fout()*20+8, e.fout()*20+8);
+			Draw.reset();
 		});
 	},
 	draw(tile){
 		entity = tile.ent();
 		this.super$draw(tile);
-		var ang = Time.time()*2+Mathf.sinDeg(Time.time())*20;
+		var ang = Time.time()*2;
 		var x1 = Angles.trnsx(ang, 0, 8 + Mathf.sinDeg(Time.time())*2);
 		var y1 = Angles.trnsy(ang, 0, 8 + Mathf.sinDeg(Time.time())*2);
 		var x2 = Angles.trnsx(ang, 0, -8 - Mathf.sinDeg(Time.time())*2);
@@ -26,10 +26,6 @@ const itemshop = extendContent(Block, "itemshop", {
 		var y4 = Angles.trnsy(ang, -8 - Mathf.sinDeg(Time.time())*2, 0);
 		var tx = tile.drawx();
 		var ty = tile.drawy();
-		/*Effects.effect(this.itemFx, tx + x1, ty + y1);
-		Effects.effect(this.itemFx, tx + x2, ty + y2);
-		Effects.effect(this.itemFx, tx + x3, ty + y3);
-		Effects.effect(this.itemFx, tx + x4, ty + y4);*/
 		
 		Draw.rect("item-copper-small", tx + x1, ty + y1);
 		Draw.rect("item-lead-small", tx + x2, ty + y2);
@@ -41,7 +37,7 @@ const itemshop = extendContent(Block, "itemshop", {
 		entity = tile.ent();
 		var itemsel = Vars.content.items().get(0);
         var itemam = 0;
-		table.addImageButton(Icon.box, Styles.clearTransi, run(()=>{
+		table.addImageButton(Icon.box, run(()=>{
 			const dialog = new FloatingDialog("Shop");
 			dialog.setFillParent(/*false*/true);
 			dialog.cont.table(cons(tb => {
@@ -133,13 +129,14 @@ const itemshop = extendContent(Block, "itemshop", {
 				})).growX()/*height(Core.graphics.height*0.8)*/;
 			}));
 			dialog.cont.row();
+			dialog.addCloseButton();
 			dialog.cont.table(cons(tb=> {
-				tb.addButton(cons(t => {
+				/*tb.addButton(cons(t => {
 					t.center();
 					t.add("Back");
                 }), run(() => {
                 	dialog.hide();
-                }));
+                }));*/
                 tb.addButton(cons(t => {
 					t.center();
 					t.add("Sell Items");

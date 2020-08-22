@@ -89,7 +89,7 @@ const itemshop = extendContent(Block, "itemshop", {
 						})).growX();
 						tb.row();*/
 					};
-				})).growX().width(Core.graphics.width/3)/*.height(Core.graphics.height*0.8)*/;
+				})).growX()/*.width(Core.graphics.width/3).height(Core.graphics.height*0.8)*/;
 				tab.pane(cons(tb => {
 					var units = Vars.content.units();
 					var unlist = [];
@@ -125,7 +125,7 @@ const itemshop = extendContent(Block, "itemshop", {
             		for(i = 0; i < units.size; i++){
 						summonButton(tb, i);
 					};
-				})).growX().width(Core.graphics.width/3).height(Core.graphics.height*0.8);
+				})).growX()/*.width(Core.graphics.width/3).height(Core.graphics.height*0.8)*/;
 			}));
 			dialog.cont.row();
 			dialog.cont.table(cons(tb=> {

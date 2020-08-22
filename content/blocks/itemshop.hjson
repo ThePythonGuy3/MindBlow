@@ -8,8 +8,8 @@ itemCapacity: 300
 targetable: false
 configurable: true
 requirements: [
-  copper/150
-  zinc/10
+  copper/400
+  brass/50
 ]
 category: effect
 research: core-shard

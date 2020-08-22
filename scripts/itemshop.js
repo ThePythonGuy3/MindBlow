@@ -66,7 +66,7 @@ const itemshop = extendContent(Block, "itemshop", {
                             		entity.setAcoins(entity.getAcoins()-price);
                             		entity.items.add(item, 20);
                             		dialog.hide();
-                            		Vars.ui.showInfoToast("[accent]Thanks for your purchase![]\nThe items are inside the shop. Use unloaders to get them.", 5);
+                            		Vars.ui.showInfoToast("[accent]Thanks for your purchase![]\nThe items are inside the shop.\nUse unloaders to get them.", 5);
                             	}));
                         	} else {
                         		Vars.ui.showErrorMessage("Not Enough AnuCoins");
@@ -92,9 +92,7 @@ const itemshop = extendContent(Block, "itemshop", {
 				})).growX()/*.width(Core.graphics.width/3).height(Core.graphics.height*0.8)*/;
 				if(Vars.mobile){
 					tab.row();
-					tab.add("");
-					tab.row();
-					tab.add("");
+					tab.add("").padTop(5).padBottom(5);
 					tab.row();
 				}
 				tab.pane(cons(tb => {
@@ -104,7 +102,7 @@ const itemshop = extendContent(Block, "itemshop", {
 						var unit = units.get(i)
                         if(unit == null) return;
                         unlist.push(unit);
-                        var price = Mathf.round(unit.health+unit.weapon.bullet.damage*50);
+                        var price = unit.getMindblowPrice==undefined?Mathf.round(unit.health+unit.weapon.bullet.damage*50):unit.getMindblowPrice();
                         tb.addButton(cons(t => {
                             t.left();
                             t.addImage(unit.icon(Cicon.medium)).size(40).padRight(5);
@@ -150,8 +148,10 @@ const itemshop = extendContent(Block, "itemshop", {
                 		const sdialog = new FloatingDialog("Sell Items");
                 		var core = Vars.state.teams.get(Vars.player.getTeam()).cores.first();
                 		
-                		sdialog.setFillParent(false);
-                		sdialog.cont.table(cons(tb => {
+                			sdialog.setFillParent(false);
+                			sdialog.center();
+                			sdialog.cont.table(cons(tb => {
+                			tb.center();
                 			tb.addButton(cons(t => {
                 				t.center();
                 				t.addImage(itemsel.icon(Cicon.medium)).size(48);
@@ -181,8 +181,28 @@ const itemshop = extendContent(Block, "itemshop", {
 								isdialog.row();
 								isdialog.addCloseButton();
 								isdialog.show();
-                			}));
-                			tb.
+                			})).padRight(5);
+                			var textarea = new TextArea(itemam);
+                			tb.add(textarea);
+                			tb.row();
+                			tb.addButton(cons(t => {
+                            	t.left();
+                            	t.add("Sell");
+                        	}), run(() => {
+                        		itemam = textarea.getText();
+                        		var price = Mathf.round((Mathf.round(scorelib.scores().get(itemsel))*0.8)*itemam);
+                        		if(core.items.has(itemsel, itemam)){
+                        			Vars.ui.showConfirm("Sell Confirmation", "Are you sure you want to sell [accent]" + itemam + " " + itemsel.localizedName + "[]\nFor " + price + " [accent]AnuCoins[]?", run(()=>{
+                        				core.items.remove(itemsel, itemam);
+                        				entity.setAcoins(entity.getAcoins()+price);
+                        				sdialog.hide();
+                        				dialog.hide();
+                        				Vars.ui.showInfoToast("[accent]Thank you![]", 5);
+                        			}));
+                        		} else {
+                        			Vars.ui.showErrorMessage("Not enough items on the core");
+                        		}
+                        	})).growX();
                 		}));
                 		sdialog.row();
                 		sdialog.addCloseButton();

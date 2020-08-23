@@ -154,7 +154,7 @@ const itemshop = extendContent(Block, "itemshop", {
                 				t.addImage(itemsel.icon(Cicon.medium)).size(48);
                 			}), run(() => {
                 				const isdialog = new FloatingDialog("Select Item");
-                				isdialog.setFillParent(false);
+                				isdialog.setFillParent(true);
                 				function itemSelectButton(tb, i){
 									var item = Vars.content.items().get(i)
                         			if(item == null) return;
@@ -174,7 +174,7 @@ const itemshop = extendContent(Block, "itemshop", {
                 					for(i = 0; i < Vars.content.items().size; i++){
 										itemSelectButton(tb, i);
 									};
-								})).growX().height(Core.graphics.height*0.6);
+								})).growX().width(Core.graphics.width/3);
 								isdialog.row();
 								isdialog.addCloseButton();
 								isdialog.show();
@@ -188,7 +188,7 @@ const itemshop = extendContent(Block, "itemshop", {
                         	}), run(() => {
                         		itemam = textarea.getText();
                         		var price = Mathf.round((Mathf.round(scorelib.scores().get(itemsel))*0.8)*itemam);
-                        		if(core.items.has(itemsel, itemam)){
+                        		if(core.items.has(itemsel, itemam)&&core.items.get(itemsel)>0){
                         			Vars.ui.showConfirm("Sell Confirmation", "Are you sure you want to sell [accent]" + itemam + " " + itemsel.localizedName + "[]\nFor " + price + " [accent]AnuCoins[]?", run(()=>{
                         				core.items.remove(itemsel, itemam);
                         				entity.setAcoins(entity.getAcoins()+price);
@@ -197,7 +197,29 @@ const itemshop = extendContent(Block, "itemshop", {
                         				Vars.ui.showInfoToast("[accent]Thank you![]", 5);
                         			}));
                         		} else {
-                        			Vars.ui.showErrorMessage("Not enough items on the core");
+                        			if(core.items.get(itemsel)>0){
+                        				Vars.ui.showErrorMessage("There is not enough [accent]" + itemsel.localizedName + "[] on the core.\nThere is only: " + core.items.get(itemsel));
+                        			} else {
+                        				Vars.ui.showErrorMessage("There is no [accent]" + itemsel.localizedName + "[] on the core.");
+                        			}
+                        		}
+                        	})).growX();
+                        	tb.addButton(cons(t => {
+                            	t.left();
+                            	t.add("Sell All");
+                        	}), run(() => {
+                        		itemam = core.items.get(itemsel);
+                        		var price = Mathf.round((Mathf.round(scorelib.scores().get(itemsel))*0.8)*itemam);
+                        		if(core.items.get(itemsel)>0){
+                        			Vars.ui.showConfirm("Sell Confirmation", "Are you sure you want to sell [accent]" + itemam + " " + itemsel.localizedName + "[]\nFor " + price + " [accent]AnuCoins[]?", run(()=>{
+                        				core.items.remove(itemsel, itemam);
+                        				entity.setAcoins(entity.getAcoins()+price);
+                        				sdialog.hide();
+                        				dialog.hide();
+                        				Vars.ui.showInfoToast("[accent]Thank you![]", 5);
+                        			}));
+                        		} else {
+                        			Vars.ui.showErrorMessage("There is no [accent]" + itemsel.localizedName + "[] on the core.");
                         		}
                         	})).growX();
                 		}));

@@ -1,0 +1,28 @@
+startingItems: [
+	copper/400
+	lead/500
+	brass/200
+	titanium/50
+]
+conditionWave: 40
+launchPeriod: 20
+requirements: [
+		{
+			"type": "ZoneWave",
+			"zone": "nuclearComplex",
+			"wave": 60
+		}
+		{
+			"type": "ZoneWave",
+			"zone": "tarFields",
+			"wave": 40
+		}
+		{
+			"type": "Unlock",
+			"block": "itemshop"
+		}
+		{
+			"type": "Unlock",
+			"block": "brass-smelter"
+		}
+]

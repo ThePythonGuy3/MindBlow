@@ -36,7 +36,7 @@ const itemshop = extendContent(Block, "itemshop", {
 	buildConfiguration(tile, table){
 		entity = tile.ent();
 		var itemsel = Vars.content.items().get(0);
-        var itemam = 0;
+		var itemam = 0;
 		table.addImageButton(Icon.box, run(()=>{
 			const dialog = new FloatingDialog("Shop");
 			dialog.setFillParent(/*false*/true);
@@ -50,26 +50,26 @@ const itemshop = extendContent(Block, "itemshop", {
 				tab.pane(cons(tb => {
 					function itemButton(tb, i){
 						var item = Vars.content.items().get(i)
-                        if(item == null) return;
+						if(item == null) return;
 						var price = Mathf.round(scorelib.scores().get(item))*20;
-                        tb.addButton(cons(t => {
-                            t.left();
-                            t.addImage(item.icon(Cicon.medium)).size(40).padRight(5);
-                            t.add(item.localizedName + "[accent] x20[]\nPrice: " + price + " [accent]AnuCoins[]");
-                        }), run(() => {
-                        	if(entity.getAcoins()>=price){
-                        		Vars.ui.showConfirm("Confirm Your Purchase", "Are you sure you want to buy [accent]" + item.localizedName + " x20[]\nFor " + price + " [accent]AnuCoins[]?", run(()=>{
-                            		entity.setAcoins(entity.getAcoins()-price);
-                            		entity.items.add(item, 20);
-                            		dialog.hide();
-                            		Vars.ui.showInfoToast("[accent]Thanks for your purchase![]\nThe items are inside the shop.\nUse unloaders to get them.", 5);
-                            	}));
-                        	} else {
-                        		Vars.ui.showErrorMessage("Not Enough AnuCoins");
-                        	}
-                        })).growX();
-                    
-                        tb.row();
+						tb.addButton(cons(t => {
+							t.left();
+							t.addImage(item.icon(Cicon.medium)).size(40).padRight(5);
+							t.add(item.localizedName + "[accent] x20[]\nPrice: " + price + " [accent]AnuCoins[]");
+						}), run(() => {
+							if(entity.getAcoins()>=price){
+								Vars.ui.showConfirm("Confirm Your Purchase", "Are you sure you want to buy [accent]" + item.localizedName + " x20[]\nFor " + price + " [accent]AnuCoins[]?", run(()=>{
+									entity.setAcoins(entity.getAcoins()-price);
+									entity.items.add(item, 20);
+									dialog.hide();
+									Vars.ui.showInfoToast("[accent]Thanks for your purchase![]\nThe items are inside the shop.\nUse unloaders to get them.", 5);
+								}));
+							} else {
+								Vars.ui.showErrorMessage("Not Enough AnuCoins");
+							}
+						})).growX();
+					
+						tb.row();
 					}
 					for(i = 0; i < Vars.content.items().size; i++){
 						itemButton(tb, i);
@@ -77,11 +77,11 @@ const itemshop = extendContent(Block, "itemshop", {
 						if(item == null) continue;
 						var price = Mathf.round(scorelib.scores().get(item))*20;
 						tb.addButton(cons(t => {
-                    		t.left();
-                    		t.addImage(item.icon(Cicon.medium)).size(40).padRight(5);
-                    		t.add(item.localizedName + "[accent] x20[]\nPrice: " + price + " [accent]AnuCoins[]");
-                		}), run(() => {
-                    		//nothing
+							t.left();
+							t.addImage(item.icon(Cicon.medium)).size(40).padRight(5);
+							t.add(item.localizedName + "[accent] x20[]\nPrice: " + price + " [accent]AnuCoins[]");
+						}), run(() => {
+							//nothing
 						})).growX();
 						tb.row();*/
 					};
@@ -96,34 +96,34 @@ const itemshop = extendContent(Block, "itemshop", {
 					var unlist = [];
 					function summonButton(tb, i){
 						var unit = units.get(i)
-                        if(unit == null) return;
-                        unlist.push(unit);
-                        var price = unit.getMindblowPrice==undefined?Mathf.round(unit.health+unit.weapon.bullet.damage*50):unit.getMindblowPrice();
-                        tb.addButton(cons(t => {
-                            t.left();
-                            t.addImage(unit.icon(Cicon.medium)).size(40).padRight(5);
-                            t.add(unit.localizedName + "\nPrice: " + price + " [accent]AnuCoins[]");
-                        }), run(() => {
-                        	if(entity.getAcoins()>=price){
-                        		Vars.ui.showConfirm("Confirm Your Purchase", "Are you sure you want to buy [accent]" + unit.localizedName + "[]\nFor " + price + " [accent]AnuCoins[]?", run(()=>{
-                            		entity.setAcoins(entity.getAcoins()-price);
-                            		var un = unit.create(tile.getTeam());
-                            		var rnd = Mathf.random()*360;
-                            		var x = tile.drawx() + Angles.trnsx(rnd, 0, 20);
-                            		var y = tile.drawy() + Angles.trnsy(rnd, 0, 20);
-                            		un.set(x, y);
-                            		un.add();
-                            		dialog.hide();
-                            		Vars.ui.showInfoToast("[accent]Thanks for your purchase![]", 5);
-                            	}));
-                        	} else {
-                        		Vars.ui.showErrorMessage("Not Enough AnuCoins");
-                        	}
-                        })).growX();
-                    
-                        tb.row();
+						if(unit == null) return;
+						unlist.push(unit);
+						var price = unit.getMindblowPrice==undefined?Mathf.round(unit.health+unit.weapon.bullet.damage*50):unit.getMindblowPrice();
+						tb.addButton(cons(t => {
+							t.left();
+							t.addImage(unit.icon(Cicon.medium)).size(40).padRight(5);
+							t.add(unit.localizedName + "\nPrice: " + price + " [accent]AnuCoins[]");
+						}), run(() => {
+							if(entity.getAcoins()>=price){
+								Vars.ui.showConfirm("Confirm Your Purchase", "Are you sure you want to buy [accent]" + unit.localizedName + "[]\nFor " + price + " [accent]AnuCoins[]?", run(()=>{
+									entity.setAcoins(entity.getAcoins()-price);
+									var un = unit.create(tile.getTeam());
+									var rnd = Mathf.random()*360;
+									var x = tile.drawx() + Angles.trnsx(rnd, 0, 20);
+									var y = tile.drawy() + Angles.trnsy(rnd, 0, 20);
+									un.set(x, y);
+									un.add();
+									dialog.hide();
+									Vars.ui.showInfoToast("[accent]Thanks for your purchase![]", 5);
+								}));
+							} else {
+								Vars.ui.showErrorMessage("Not Enough AnuCoins");
+							}
+						})).growX();
+					
+						tb.row();
 					}
-            		for(i = 0; i < units.size; i++){
+					for(i = 0; i < units.size; i++){
 						summonButton(tb, i);
 					};
 				})).growX()/*height(Core.graphics.height*0.8)*/;
@@ -134,101 +134,129 @@ const itemshop = extendContent(Block, "itemshop", {
 				/*tb.addButton(cons(t => {
 					t.center();
 					t.add("Back");
-                }), run(() => {
-                	dialog.hide();
-                }));*/
-                tb.addButton(cons(t => {
+				}), run(() => {
+					dialog.hide();
+				}));*/
+				tb.addButton(cons(t => {
 					t.center();
 					t.add("Sell Items");
-                }), run(() => {
-                	function buildSell(){
-                		const sdialog = new FloatingDialog("Sell Items");
-                		var core = Vars.state.teams.get(Vars.player.getTeam()).cores.first();
-                		
-                			sdialog.setFillParent(false);
-                			sdialog.center();
-                			sdialog.cont.table(cons(tb => {
-                			tb.center();
-                			tb.addButton(cons(t => {
-                				t.center();
-                				t.addImage(itemsel.icon(Cicon.medium)).size(48);
-                			}), run(() => {
-                				const isdialog = new FloatingDialog("Select Item");
-                				isdialog.setFillParent(true);
-                				function itemSelectButton(tb, i){
+				}), run(() => {
+					function buildSell(){
+						const sdialog = new FloatingDialog("Sell Items");
+						var core = Vars.state.teams.get(Vars.player.getTeam()).cores.first();
+						
+							sdialog.setFillParent(false);
+							sdialog.center();
+							sdialog.cont.table(cons(tb => {
+							tb.center();
+                            var textarea = new TextArea(itemam);
+							tb.table(cons(tb => {
+                            tb.addButton(cons(t => {
+								t.center();
+								t.addImage(itemsel.icon(Cicon.medium)).size(48);
+							}), run(() => {
+								const isdialog = new FloatingDialog("Select Item");
+								isdialog.setFillParent(true);
+								function itemSelectButton(tb, i){
 									var item = Vars.content.items().get(i)
-                        			if(item == null) return;
-                        			tb.addButton(cons(t => {
-                            			t.left();
-                            			t.addImage(item.icon(Cicon.medium)).size(40).padRight(5);
-                            			t.add(item.localizedName);
-                        			}), run(() => {
-                        				itemsel = item;
-                        				isdialog.hide();
-                        				sdialog.hide();
-                        				buildSell();
-                        			})).growX();
-                        			tb.row();
+									if(item == null) return;
+									tb.addButton(cons(t => {
+										t.left();
+										t.addImage(item.icon(Cicon.medium)).size(40).padRight(5);
+										t.add(item.localizedName);
+									}), run(() => {
+										itemsel = item;
+										isdialog.hide();
+										sdialog.hide();
+										buildSell();
+									})).growX();
+									tb.row();
 								}
 								isdialog.cont.pane(cons(tb => {
-                					for(i = 0; i < Vars.content.items().size; i++){
+									for(i = 0; i < Vars.content.items().size; i++){
 										itemSelectButton(tb, i);
 									};
 								})).growX().width(Core.graphics.width/3);
 								isdialog.row();
 								isdialog.addCloseButton();
 								isdialog.show();
-                			})).padRight(5);
-                			var textarea = new TextArea(itemam);
-                			tb.add(textarea);
-                			tb.row();
-                			tb.addButton(cons(t => {
-                            	t.left();
-                            	t.add("Sell");
-                        	}), run(() => {
-                        		itemam = textarea.getText();
-                        		var price = Mathf.round((Mathf.round(scorelib.scores().get(itemsel))*0.8)*itemam);
-                        		if(core.items.has(itemsel, itemam)&&core.items.get(itemsel)>0){
-                        			Vars.ui.showConfirm("Sell Confirmation", "Are you sure you want to sell [accent]" + itemam + " " + itemsel.localizedName + "[]\nFor " + price + " [accent]AnuCoins[]?", run(()=>{
-                        				core.items.remove(itemsel, itemam);
-                        				entity.setAcoins(entity.getAcoins()+price);
-                        				sdialog.hide();
-                        				dialog.hide();
-                        				Vars.ui.showInfoToast("[accent]Thank you![]", 5);
-                        			}));
-                        		} else {
-                        			if(core.items.get(itemsel)>0){
-                        				Vars.ui.showErrorMessage("There is not enough [accent]" + itemsel.localizedName + "[] on the core.\nThere is only: " + core.items.get(itemsel));
-                        			} else {
-                        				Vars.ui.showErrorMessage("There is no [accent]" + itemsel.localizedName + "[] on the core.");
-                        			}
-                        		}
-                        	})).growX();
-                        	tb.addButton(cons(t => {
-                            	t.left();
-                            	t.add("Sell All");
-                        	}), run(() => {
-                        		itemam = core.items.get(itemsel);
-                        		var price = Mathf.round((Mathf.round(scorelib.scores().get(itemsel))*0.8)*itemam);
-                        		if(core.items.get(itemsel)>0){
-                        			Vars.ui.showConfirm("Sell Confirmation", "Are you sure you want to sell [accent]" + itemam + " " + itemsel.localizedName + "[]\nFor " + price + " [accent]AnuCoins[]?", run(()=>{
-                        				core.items.remove(itemsel, itemam);
-                        				entity.setAcoins(entity.getAcoins()+price);
-                        				sdialog.hide();
-                        				dialog.hide();
-                        				Vars.ui.showInfoToast("[accent]Thank you![]", 5);
-                        			}));
-                        		} else {
-                        			Vars.ui.showErrorMessage("There is no [accent]" + itemsel.localizedName + "[] on the core.");
-                        		}
-                        	})).growX();
-                		}));
-                		sdialog.row();
-                		sdialog.addCloseButton();
-                		sdialog.show();
-                	}
-                	buildSell();
-                }));
+							})).padRight(5);
+							
+							tb.addButton(cons(t => {
+								t.left();
+								t.addImage(Core.atlas.find("mindblow-minus-icon")).size(32);
+							}), run(() => {
+                                    if(itemam>0){
+								        itemam+=-1;
+                                        textarea.setText(itemam);
+                                    }
+							})).growX().height(60).width(60);
+							tb.add(textarea);
+							tb.addButton(cons(t => {
+								t.left();
+								t.addImage(Core.atlas.find("mindblow-plus-icon")).size(32);
+							}), run(() => {
+								itemam++;
+                                    textarea.setText(itemam);
+							})).growX().height(60).width(60);
+                            }));
+							tb.row();
+							tb.center();
+                            tb.table(cons(tb=>{
+							tb.addButton(cons(t => {
+								t.center();
+								t.add("Sell");
+							}), run(() => {
+								if(!isNaN(textarea.getText())&&textarea.getText()>0){
+									itemam = textarea.getText();
+									var price = Mathf.round((Mathf.round(scorelib.scores().get(itemsel))*0.8)*itemam);
+									if(core.items.has(itemsel, itemam)&&core.items.get(itemsel)>0){
+									Vars.ui.showConfirm("Sell Confirmation", "Are you sure you want to sell [accent]" + itemam + " " + itemsel.localizedName + "[]\nFor " + price + " [accent]AnuCoins[]?", run(()=>{
+									core.items.remove(itemsel, itemam);
+										entity.setAcoins(entity.getAcoins()+price);
+										sdialog.hide();
+										dialog.hide();
+										Vars.ui.showInfoToast("[accent]Thank you![]", 5);
+									}));
+									} else {
+									if(core.items.get(itemsel)>0){
+										Vars.ui.showErrorMessage("There is not enough [accent]" + itemsel.localizedName + "[] on the core.\nThere is only: " + core.items.get(itemsel));
+									} else {
+										Vars.ui.showErrorMessage("There is no [accent]" + itemsel.localizedName + "[] on the core.");
+									}
+								}
+                                } else {
+                                    itemam = 0;
+                                    textarea.setText(itemam);
+                                    Vars.ui.showErrorMessage("Not a valid number!");
+                                }
+							})).growX().width(150);
+							tb.addButton(cons(t => {
+								t.center();
+								t.add("Sell All");
+							}), run(() => {
+								itemam = core.items.get(itemsel);
+								var price = Mathf.round((Mathf.round(scorelib.scores().get(itemsel))*0.8)*itemam);
+								if(core.items.get(itemsel)>0){
+									Vars.ui.showConfirm("Sell Confirmation", "Are you sure you want to sell [accent]" + itemam + " " + itemsel.localizedName + "[]\nFor " + price + " [accent]AnuCoins[]?", run(()=>{
+										core.items.remove(itemsel, itemam);
+										entity.setAcoins(entity.getAcoins()+price);
+										sdialog.hide();
+										dialog.hide();
+										Vars.ui.showInfoToast("[accent]Thank you![]", 5);
+									}));
+								} else {
+									Vars.ui.showErrorMessage("There is no [accent]" + itemsel.localizedName + "[] on the core.");
+								}
+							})).growX().width(150);
+                            }));
+						}));
+						sdialog.row();
+						sdialog.addCloseButton();
+						sdialog.show();
+					}
+					buildSell();
+				}));
 			}));
 			
 			dialog.show();

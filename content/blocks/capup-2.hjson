@@ -1,0 +1,9 @@
+name: Capacity Upgrade 2
+description: Adds 200 item capacity to all shops
+buildVisibility: hidden
+requirements: [
+  copper/25
+  brass/30
+  titanium/10
+]
+research: capup-1

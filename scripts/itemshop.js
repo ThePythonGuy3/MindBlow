@@ -1,4 +1,7 @@
 const scorelib = require("mindblow/itemscorelib");
+function getBlock(name){
+    return Vars.content.getByName(ContentType.block, name);
+}
 const itemshop = extendContent(Block, "itemshop", {
 	init(){
 		this.super$init();
@@ -11,7 +14,25 @@ const itemshop = extendContent(Block, "itemshop", {
 			Draw.rect(e.data, e.x, e.y, e.fout()*20+8, e.fout()*20+8);
 			Draw.reset();
 		});
+
+        if(Vars.data.isUnlocked(getBlock("mindblow-capup-2"))){
+            this.itemCapacity = 700;
+        } else if(Vars.data.isUnlocked(getBlock("mindblow-capup-1"))){
+            this.itemCapacity = 500;
+        }
+        
 	},
+    setStats(){
+        this.super$setStats();
+        this.stats.remove(BlockStat.itemCapacity);
+        if(Vars.data.isUnlocked(getBlock("mindblow-capup-2"))){
+            this.stats.add(BlockStat.itemCapacity, 700, StatUnit.items);
+        } else if(Vars.data.isUnlocked(getBlock("mindblow-capup-1"))){
+            this.stats.add(BlockStat.itemCapacity, 500, StatUnit.items);
+        } else {
+            this.stats.add(BlockStat.itemCapacity, 300, StatUnit.items);
+        }
+    },
 	draw(tile){
 		entity = tile.ent();
 		this.super$draw(tile);

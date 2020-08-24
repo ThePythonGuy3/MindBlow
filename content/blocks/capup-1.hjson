@@ -1,0 +1,8 @@
+name: Capacity Upgrade 1
+description: Adds 200 item capacity to all shops
+buildVisibility: hidden
+requirements: [
+  copper/10
+  brass/10
+]
+research: itemshop

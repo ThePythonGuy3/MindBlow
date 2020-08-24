@@ -116,42 +116,44 @@ const itemshop = extendContent(Block, "itemshop", {
 					tab.add("").padTop(5).padBottom(5);
 					tab.row();
 				}
-				tab.pane(cons(tb => {
-					var units = Vars.content.units();
-					var unlist = [];
-					function summonButton(tb, i){
-						var unit = units.get(i)
-						if(unit == null) return;
-						unlist.push(unit);
-						var price = unit.getMindblowPrice==undefined?Mathf.round(unit.health+unit.weapon.bullet.damage*50):unit.getMindblowPrice();
-						tb.addButton(cons(t => {
-							t.left();
-							t.addImage(unit.icon(Cicon.medium)).size(40).padRight(5);
-							t.add(unit.localizedName + "\nPrice: " + price + " [accent]AnuCoins[]");
-						}), run(() => {
-							if(entity.getAcoins()>=price){
-								Vars.ui.showConfirm("Confirm Your Purchase", "Are you sure you want to buy [accent]" + unit.localizedName + "[]\nFor " + price + " [accent]AnuCoins[]?", run(()=>{
-									entity.setAcoins(entity.getAcoins()-price);
-									var un = unit.create(tile.getTeam());
-									var rnd = Mathf.random()*360;
-									var x = tile.drawx() + Angles.trnsx(rnd, 0, 20);
-									var y = tile.drawy() + Angles.trnsy(rnd, 0, 20);
-									un.set(x, y);
-									un.add();
-									dialog.hide();
-									Vars.ui.showInfoToast("[accent]Thanks for your purchase![]", 5);
-								}));
-							} else {
-								Vars.ui.showErrorMessage("Not Enough AnuCoins");
-							}
-						})).growX();
+                if(Vars.data.isUnlocked(getBlock("mindblow-unitup"))){
+				    tab.pane(cons(tb => {
+					   var units = Vars.content.units();
+					   var unlist = [];
+					   function summonButton(tb, i){
+						  var unit = units.get(i)
+						  if(unit == null) return;
+						  unlist.push(unit);
+						  var price = unit.getMindblowPrice==undefined?Mathf.round(unit.health+unit.weapon.bullet.damage*50):unit.getMindblowPrice();
+						  tb.addButton(cons(t => {
+							 t.left();
+							 t.addImage(unit.icon(Cicon.medium)).size(40).padRight(5);
+							 t.add(unit.localizedName + "\nPrice: " + price + " [accent]AnuCoins[]");
+						  }), run(() => {
+						  	 if(entity.getAcoins()>=price){
+								    Vars.ui.showConfirm("Confirm Your Purchase", "Are you sure you want to buy [accent]" + unit.localizedName + "[]\nFor " + price + " [accent]AnuCoins[]?", run(()=>{
+									   entity.setAcoins(entity.getAcoins()-price);
+									   var un = unit.create(tile.getTeam());
+									   var rnd = Mathf.random()*360;
+									   var x = tile.drawx() + Angles.trnsx(rnd, 0, 20);
+									   var y = tile.drawy() + Angles.trnsy(rnd, 0, 20);
+									   un.set(x, y);
+									   un.add();
+									   dialog.hide();
+									   Vars.ui.showInfoToast("[accent]Thanks for your purchase![]", 5);
+								    }));
+							 } else {
+							 	Vars.ui.showErrorMessage("Not Enough AnuCoins");
+							 }
+						  })).growX();
 					
-						tb.row();
-					}
-					for(i = 0; i < units.size; i++){
-						summonButton(tb, i);
-					};
-				})).growX()/*height(Core.graphics.height*0.8)*/;
+						  tb.row();
+					   }
+					   for(i = 0; i < units.size; i++){
+						  summonButton(tb, i);
+					   };
+				    })).growX()/*height(Core.graphics.height*0.8)*/;
+                }
 			}));
 			dialog.cont.row();
 			dialog.addCloseButton();

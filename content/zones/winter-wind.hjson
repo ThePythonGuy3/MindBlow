@@ -6,15 +6,15 @@ startingItems: [
 ]
 conditionWave: 40
 launchPeriod: 20
-requirements: [
+requirements: [		
 		{
 			type: ZoneWave
-			zone: frozenForest
+			zone: desertWastes
 			wave: 20
 		}
 		{
 			type: ZoneWave
-			zone: desertWastes
+			zone: frozenForest
 			wave: 20
 		}
 ]

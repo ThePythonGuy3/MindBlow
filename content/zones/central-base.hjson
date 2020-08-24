@@ -8,16 +8,16 @@ startingItems: [
 ]
 conditionWave: 40
 launchPeriod: 20
-requirements: [
-		{
-			"type": "ZoneWave",
-			"zone": "nuclearComplex",
-			"wave": 60
-		}
+requirements: [	
 		{
 			"type": "ZoneWave",
 			"zone": "tarFields",
 			"wave": 40
+		}
+		{
+			"type": "ZoneWave",
+			"zone": "nuclearComplex",
+			"wave": 60
 		}
 		{
 			"type": "Unlock",

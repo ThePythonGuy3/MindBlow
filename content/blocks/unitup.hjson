@@ -1,0 +1,9 @@
+name: Unit Shop Addon
+description: Adds the ability of buying units to shops
+buildVisibility: hidden
+requirements: [
+  copper/30
+  brass/50
+  titanium/20
+]
+research: itemshop

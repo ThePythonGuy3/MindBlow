@@ -57,7 +57,7 @@ const itemshop = extendContent(Block, "itemshop", {
 							t.addImage(item.icon(Cicon.medium)).size(40).padRight(5);
 							t.add(item.localizedName + "[accent] x20[]\nPrice: " + price + " [accent]AnuCoins[]");
 						}), run(() => {
-							if(entity.getAcoins()>=price){
+							if(entity.getAcoins()>=price&&entity.items.total()+20<=tile.block().itemCapacity){
 								Vars.ui.showConfirm("Confirm Your Purchase", "Are you sure you want to buy [accent]" + item.localizedName + " x20[]\nFor " + price + " [accent]AnuCoins[]?", run(()=>{
 									entity.setAcoins(entity.getAcoins()-price);
 									entity.items.add(item, 20);
@@ -65,7 +65,11 @@ const itemshop = extendContent(Block, "itemshop", {
 									Vars.ui.showInfoToast("[accent]Thanks for your purchase![]\nThe items are inside the shop.\nUse unloaders to get them.", 5);
 								}));
 							} else {
-								Vars.ui.showErrorMessage("Not Enough AnuCoins");
+                                if(entity.items.total()+20>tile.block().itemCapacity){
+                                    Vars.ui.showErrorMessage("Theres not enough space in the shop right now.")
+                                } else {
+								    Vars.ui.showErrorMessage("Not Enough AnuCoins");
+                                }
 							}
 						})).growX();
 					
@@ -174,7 +178,9 @@ const itemshop = extendContent(Block, "itemshop", {
 								}
 								isdialog.cont.pane(cons(tb => {
 									for(i = 0; i < Vars.content.items().size; i++){
-										itemSelectButton(tb, i);
+                                        if(Vars.content.items().get(i).type == ItemType.material){
+										  itemSelectButton(tb, i);
+                                        }
 									};
 								})).growX().width(Core.graphics.width/3);
 								isdialog.row();

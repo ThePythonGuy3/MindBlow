@@ -4,6 +4,7 @@ name: Shop
 description: Lets you buy and sell stuff, uses AnuCoins.
 update: true
 hasItems: true
+sync: true
 itemCapacity: 300
 targetable: false
 configurable: true

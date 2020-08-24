@@ -1,0 +1,20 @@
+name: Winter Wind
+description: This small hill is a neutral zone, but crux has taken it. Use shops to trade items, and protect them with your soul, since its the only way of getting anything besides copper and zinc.
+startingItems: [
+	copper/400
+	lead/300
+]
+conditionWave: 40
+launchPeriod: 20
+requirements: [
+		{
+			type: ZoneWave
+			zone: frozenForest
+			wave: 20
+		}
+		{
+			type: ZoneWave
+			zone: desertWastes
+			wave: 20
+		}
+]

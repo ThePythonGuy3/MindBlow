@@ -304,7 +304,15 @@ itemshop.entityType = prov(() => {
 		},
 		setAcoins: function(val){
 			this._aco = val;
-		}
+		},
+        write(stream){
+            this.super$write(stream);
+            stream.writeInt(this._aco == null ? 0 : this._aco);
+        },
+        read(stream,revision){
+            this.super$read(stream,revision);
+            this._aco=stream.readInt();
+        }
 	});
 	entity.setAcoins(0);
 	return entity;

@@ -15,7 +15,9 @@ const itemshop = extendContent(Block, "itemshop", {
 			Draw.reset();
 		});
 
-        if(Vars.data.isUnlocked(getBlock("mindblow-capup-2"))){
+        if(Vars.data.isUnlocked(getBlock("mindblow-capup-3"))){
+            this.itemCapacity = 900;
+        } else if(Vars.data.isUnlocked(getBlock("mindblow-capup-2"))){
             this.itemCapacity = 700;
         } else if(Vars.data.isUnlocked(getBlock("mindblow-capup-1"))){
             this.itemCapacity = 500;
@@ -25,7 +27,9 @@ const itemshop = extendContent(Block, "itemshop", {
     setStats(){
         this.super$setStats();
         this.stats.remove(BlockStat.itemCapacity);
-        if(Vars.data.isUnlocked(getBlock("mindblow-capup-2"))){
+        if(Vars.data.isUnlocked(getBlock("mindblow-capup-3"))){
+            this.stats.add(BlockStat.itemCapacity, 900, StatUnit.items);
+        } else if(Vars.data.isUnlocked(getBlock("mindblow-capup-2"))){
             this.stats.add(BlockStat.itemCapacity, 700, StatUnit.items);
         } else if(Vars.data.isUnlocked(getBlock("mindblow-capup-1"))){
             this.stats.add(BlockStat.itemCapacity, 500, StatUnit.items);
@@ -136,8 +140,8 @@ const itemshop = extendContent(Block, "itemshop", {
 									   entity.setAcoins(entity.getAcoins()-price);
 									   var un = unit.create(tile.getTeam());
 									   var rnd = Mathf.random()*360;
-									   var x = tile.drawx() + Angles.trnsx(rnd, 0, 20);
-									   var y = tile.drawy() + Angles.trnsy(rnd, 0, 20);
+									   var x = tile.drawx() + Angles.trnsx(rnd, 0, 5);
+									   var y = tile.drawy() + Angles.trnsy(rnd, 0, 5);
 									   un.set(x, y);
 									   un.add();
 									   dialog.hide();

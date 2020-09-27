@@ -12,7 +12,7 @@ const flareEffect = newEffect(18, e => {
 
 module.exports = {
 	newBase(segments, segmentOffset, turnSpeed, headDamage, canSplit, drawUnder, drawOver, customBehavior, customSave, customLoad, dataList){
-		base = extend(FlyingUnit, {
+		base = extend(GroundUnit, {
 			added(){
 				this.super$added();
 				//print("id: " + this.id + ", loaded: " + this.loaded + ", savedAsHead: " + this._savedAsHead);

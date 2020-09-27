@@ -5,6 +5,7 @@ description: Lets you buy and sell stuff, uses AnuCoins.
 update: true
 hasItems: true
 sync: true
+hasPower: true
 itemCapacity: 300
 targetable: false
 configurable: true

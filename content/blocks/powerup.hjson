@@ -1,5 +1,5 @@
-name: Capacity Upgrade 3
-description: Adds 200 item capacity to all shops
+name: Power Creation
+description: Makes shops create power depending on your AnuCoins.
 buildVisibility: hidden
 requirements: [
   copper/150

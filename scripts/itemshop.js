@@ -58,9 +58,6 @@ const itemshop = extendContent(Block, "itemshop", {
 		Draw.rect("item-silicon-small", tx + x4, ty + y4);
 		
 	},
-	getPowerProduction(tile){
-		return Vars.data.isUnlocked(getBlock("mindblow-powerup"))?tile.ent().getAcoins():0;
-	},
 	buildConfiguration(tile, table){
 		entity = tile.ent();
 		var itemsel = Vars.content.items().get(0);

@@ -18,8 +18,3 @@ const unp = extendContent(Block, "unitup", {
 	canPlaceOn(){return false},
 	isHidden(){return true}
 });
-const pup = extendContent(Block, "powerup", {
-	setStats(){},
-	canPlaceOn(){return false},
-	isHidden(){return true}
-});

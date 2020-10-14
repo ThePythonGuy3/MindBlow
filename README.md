@@ -17,6 +17,6 @@ Adds a vanilla expansion to mindustry. It adds multiple drills, turrets, resourc
 
 > Thanks to **Senri** for Bundle Lib!
 
-> We have a [discord server](https://discord.gg/x9kECkW)!
+> We have a [discord server](https://discord.gg/RCCVQFW)!
 
 If you think its worth it, star this repository :D

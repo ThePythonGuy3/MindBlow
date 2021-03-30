@@ -1,5 +1,7 @@
 # MindBlow
 
+[Pankiwi](https://github.com/Pankiwi) developed [Horition](https://github.com/Pankiwi/Horition), a v6 mod including Mindblow content, go check it out!
+
 Adds a vanilla expansion to mindustry. It adds multiple drills, turrets, resources, and some units. 
 *Still in development*
 
